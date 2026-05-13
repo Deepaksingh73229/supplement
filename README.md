@@ -1,6 +1,6 @@
 # Supplement Review System
 
-An AI-powered nutraceutical formulation analysis and review platform built with **Next.js 15**, **TypeScript**, and **Google Gemini AI**.
+An AI-powered nutraceutical formulation analysis and review platform built with **Next.js 16**, **TypeScript**, and **Google Gemini AI**.
 
 ## Features
 
@@ -18,9 +18,9 @@ An AI-powered nutraceutical formulation analysis and review platform built with 
 
 | Layer | Technology |
 |-------|------------|
-| Framework | Next.js 15 (App Router) |
+| Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
-| Styling | Tailwind CSS 3 |
+| Styling | Tailwind CSS 4 |
 | UI Components | Radix UI + Custom Components |
 | Animations | Framer Motion |
 | Icons | Lucide React |
@@ -77,7 +77,7 @@ supplement-review-system/
 ### 1. Clone and Install
 
 ```bash
-cd supplement-review-system
+cd supplement
 npm install
 ```
 
@@ -177,7 +177,3 @@ POST /api/search
 - **In-memory vector store** - Embeddings cached in localStorage for fast repeated searches
 - **Framer Motion** - Smooth page transitions and micro-interactions
 - **Radix UI primitives** - Accessible, unstyled components as building blocks
-
-## License
-
-MIT
