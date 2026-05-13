@@ -15,19 +15,10 @@ export function SearchPage() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { apiKey, isConfigured } = useGeminiKey();
+  const { apiKey, isConfigured, isSystemConfigured } = useGeminiKey();
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!isConfigured) {
-      toast({
-        title: 'API Key Required',
-        description: 'Please set your Gemini API key first.',
-        variant: 'destructive',
-      });
-      return;
-    }
 
     if (!query.trim()) return;
 
@@ -69,7 +60,7 @@ export function SearchPage() {
   ];
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-b from-background to-muted/20 p-6">
+    <div className="min-h-[calc(100vh-4rem)] bg-linear-to-b from-background to-muted/20 p-6">
       <div className="max-w-4xl mx-auto space-y-12 pt-8">
         
         {/* Hero Section */}
@@ -83,7 +74,7 @@ export function SearchPage() {
             <Sparkles className="h-7 w-7 text-primary" />
           </div>
           <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-primary via-primary/80 to-primary/50 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-linear-to-r from-primary via-primary/80 to-primary/50 bg-clip-text text-transparent">
               Semantic Ingredient Search
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -102,7 +93,7 @@ export function SearchPage() {
         >
           <form onSubmit={handleSearch} className="relative group">
             {/* Focus Glow Effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-[2rem] blur opacity-0 group-focus-within:opacity-100 transition duration-500"></div>
+            <div className="absolute -inset-1 bg-linear-to-r from-primary/20 via-primary/10 to-primary/20 rounded-[2rem] blur opacity-0 group-focus-within:opacity-100 transition duration-500"></div>
             
             <div className="relative flex items-center bg-background border shadow-sm hover:shadow-md transition-shadow rounded-[2rem] p-2 focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary">
               <Search className="absolute left-6 h-6 w-6 text-muted-foreground/70" />
@@ -113,7 +104,7 @@ export function SearchPage() {
                 className="border-0 shadow-none focus-visible:ring-0 pl-16 pr-36 h-14 text-lg bg-transparent rounded-full w-full"
               />
               <div className="absolute right-2 flex items-center gap-2">
-                {!isConfigured && (
+                {(!isConfigured && !isSystemConfigured) && (
                   <Badge variant="destructive" className="hidden sm:flex gap-1 h-10 px-3 rounded-full">
                     <AlertCircle className="h-4 w-4" />
                     API Key

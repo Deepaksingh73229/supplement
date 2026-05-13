@@ -25,7 +25,7 @@ export function HistoryPage() {
     };
 
     return (
-        <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-b from-background to-muted/20 p-6">
+        <div className="min-h-[calc(100vh-4rem)] bg-linear-to-b from-background to-muted/20 p-6">
             <div className="max-w-5xl mx-auto pt-4">
                 {/* Header Section */}
                 <motion.div
@@ -91,7 +91,7 @@ export function HistoryPage() {
                     ) : (
                         <motion.div key="history-list" className="relative">
                             {/* Optional: Add a subtle fade at the bottom of the scroll area */}
-                            <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
+                            <div className="absolute bottom-0 left-0 right-0 h-12 bg-linear-to-t from-background to-transparent z-10 pointer-events-none" />
 
                             <ScrollArea className="h-[calc(100vh-240px)] pr-4 pb-12">
                                 <div className="space-y-4">
@@ -137,7 +137,7 @@ export function HistoryPage() {
                                                         {/* Right Content: Metrics & Score */}
                                                         <div className="bg-muted/10 md:w-72 p-5 md:p-6 border-t md:border-t-0 md:border-l border-muted/40 flex flex-col justify-center relative overflow-hidden">
                                                             {/* Subtle decorative background for score area */}
-                                                            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-muted/20 opacity-50 pointer-events-none" />
+                                                            <div className="absolute inset-0 bg-linear-to-br from-transparent to-muted/20 opacity-50 pointer-events-none" />
 
                                                             <div className="relative z-10 flex items-center justify-between h-full">
                                                                 <div className="space-y-3">
@@ -152,7 +152,6 @@ export function HistoryPage() {
                                                                                 <strong className="text-foreground">{item.observations.filter(o => o.type === 'positive').length}</strong> positive
                                                                             </span>
                                                                         </div>
-                                                                        
                                                                         <div className="flex items-center gap-2 text-sm font-medium">
                                                                             <AlertTriangle className="h-4 w-4 text-amber-500 shrink-0" />
                                                                             <span className="text-muted-foreground">

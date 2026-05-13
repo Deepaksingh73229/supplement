@@ -27,7 +27,7 @@ export function Header() {
                 <div className="hidden sm:flex h-8 w-8 rounded-lg bg-primary/10 items-center justify-center border border-primary/20">
                     <Sparkles className="h-4 w-4 text-primary" />
                 </div>
-                <h1 className="text-lg sm:text-xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                <h1 className="text-lg sm:text-xl font-bold tracking-tight bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                     Supplement Review System
                 </h1>
                 <Badge

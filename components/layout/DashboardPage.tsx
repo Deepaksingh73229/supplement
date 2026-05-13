@@ -54,7 +54,7 @@ export function DashboardPage() {
     };
 
     return (
-        <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-b from-background to-muted/20 p-6 md:p-8">
+        <div className="min-h-[calc(100vh-4rem)] bg-linear-to-b from-background to-muted/20 p-6 md:p-8">
             <div className="max-w-7xl mx-auto space-y-10">
 
                 {/* Hero Header */}
@@ -190,7 +190,7 @@ export function DashboardPage() {
                     >
                         <Link href="/analyze">
                             <Card className="group relative h-full overflow-hidden border-muted/60 hover:border-primary/40 hover:shadow-lg transition-all duration-300 bg-background/50 backdrop-blur-sm cursor-pointer">
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 <CardContent className="p-6 flex flex-col h-full relative z-10">
                                     <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 ease-out">
                                         <Microscope className="h-6 w-6 text-primary" />
@@ -208,7 +208,7 @@ export function DashboardPage() {
 
                         <Link href="/search">
                             <Card className="group relative h-full overflow-hidden border-muted/60 hover:border-primary/40 hover:shadow-lg transition-all duration-300 bg-background/50 backdrop-blur-sm cursor-pointer">
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 <CardContent className="p-6 flex flex-col h-full relative z-10">
                                     <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 ease-out">
                                         <Search className="h-6 w-6 text-primary" />
@@ -226,7 +226,7 @@ export function DashboardPage() {
 
                         <Link href="/settings">
                             <Card className="group relative h-full overflow-hidden border-muted/60 hover:border-primary/40 hover:shadow-lg transition-all duration-300 bg-background/50 backdrop-blur-sm cursor-pointer">
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 <CardContent className="p-6 flex flex-col h-full relative z-10">
                                     <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 ease-out">
                                         <Shield className="h-6 w-6 text-primary" />

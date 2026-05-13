@@ -4,11 +4,13 @@ import { VectorStore } from '@/lib/vector-store';
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const { query, apiKey, topK = 5 } = body;
+        const { query, apiKey: userApiKey, topK = 5 } = body;
+        
+        const apiKey = userApiKey || process.env.GEMINI_API_KEY;
 
         if (!apiKey) {
             return NextResponse.json(
-                { error: 'Gemini API key is required' },
+                { error: 'Gemini API key is required. Please set GEMINI_API_KEY in .env or provide it in Settings.' },
                 { status: 400 }
             );
         }

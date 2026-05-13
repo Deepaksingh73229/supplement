@@ -181,7 +181,7 @@ export function AnalysisResultView({ result, onReset }: Props) {
         <div
           className="absolute inset-0 opacity-[0.015]"
           style={{
-            backgroundImage: `radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)`,
+            backgroundImage: `radial-linear(circle, hsl(var(--foreground)) 1px, transparent 1px)`,
             backgroundSize: "28px 28px",
           }}
         />
@@ -204,7 +204,7 @@ export function AnalysisResultView({ result, onReset }: Props) {
                 </Button>
                 <div className="h-6 w-px bg-border" />
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 ring-1 ring-primary/20">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-primary/5 ring-1 ring-primary/20">
                     <FlaskConical className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -238,7 +238,7 @@ export function AnalysisResultView({ result, onReset }: Props) {
           <motion.div variants={item}>
             <Card className="overflow-hidden border-0 bg-card/60 shadow-xl shadow-primary/[0.03] ring-1 ring-border/40 backdrop-blur-xl">
               <div className="relative h-1 w-full overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-primary/40 to-transparent" />
               </div>
               <CardContent className="p-8">
                 <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
@@ -588,11 +588,11 @@ export function AnalysisResultView({ result, onReset }: Props) {
                 >
                   <Card className="overflow-hidden border-0 bg-card/60 shadow-xl shadow-primary/[0.03] ring-1 ring-border/40 backdrop-blur-xl">
                     <div className="relative h-1 w-full overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+                      <div className="absolute inset-0 bg-linear-to-r from-transparent via-primary/40 to-transparent" />
                     </div>
                     <CardContent className="p-8">
                       <div className="flex items-center gap-3 mb-6">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 ring-1 ring-primary/20">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-primary/20 to-primary/5 ring-1 ring-primary/20">
                           <Sparkles className="h-5 w-5 text-primary" />
                         </div>
                         <div>

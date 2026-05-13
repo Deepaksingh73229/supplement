@@ -56,7 +56,7 @@ const itemVariants: Variants = {
 
 export function AnalyzePage() {
     const { analyze, reset, isLoading, error, result } = useAnalysis();
-    const { apiKey, isConfigured } = useGeminiKey();
+    const { apiKey, isConfigured, isSystemConfigured } = useGeminiKey();
     const [formData, setFormData] = useState<ProductInput>({
         productName: "",
         category: "",
@@ -73,14 +73,6 @@ export function AnalyzePage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!isConfigured) {
-            toast({
-                title: "API Key Required",
-                description: "Please set your Gemini API key in settings first.",
-                variant: "destructive",
-            });
-            return;
-        }
         if (!formData.productName.trim() || !formData.ingredientsText.trim()) {
             toast({
                 title: "Missing Information",
@@ -148,7 +140,7 @@ Hops Extract - 150mg`,
                                 <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
                                     <div className="relative">
                                         <div className="absolute inset-0 rounded-2xl bg-blue-500/20 blur-lg animate-pulse" />
-                                        <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25">
+                                        <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25">
                                             <ScanLine className="h-7 w-7" />
                                         </div>
                                     </div>
@@ -180,7 +172,7 @@ Hops Extract - 150mg`,
                                 </div>
                                 <div className="h-2 w-full overflow-hidden rounded-full bg-muted/80">
                                     <motion.div
-                                        className="h-full rounded-full bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600"
+                                        className="h-full rounded-full bg-linear-to-r from-blue-400 via-blue-500 to-blue-600"
                                         initial={{ width: 0 }}
                                         animate={{ width: `${progress}%` }}
                                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -279,7 +271,7 @@ L-Theanine - 200mg
 Valerian Root Extract - 300mg`}
                                                     value={formData.ingredientsText}
                                                     onChange={(e) => setFormData({ ...formData, ingredientsText: e.target.value })}
-                                                    className="min-h-[180px] rounded-lg border-border/60 bg-muted/30 font-mono text-sm leading-7 focus:bg-white dark:focus:bg-background focus:border-violet-500/50 transition-all resize-y"
+                                                    className="min-h-[130px] rounded-lg border-border/60 bg-muted/30 font-mono text-sm leading-7 focus:bg-white dark:focus:bg-background focus:border-violet-500/50 transition-all resize-y"
                                                     required
                                                 />
                                                 <div className="flex items-center justify-between">
@@ -305,7 +297,7 @@ Valerian Root Extract - 300mg`}
 "100% natural formula with zero side effects"`}
                                                     value={formData.marketingClaims}
                                                     onChange={(e) => setFormData({ ...formData, marketingClaims: e.target.value })}
-                                                    className="min-h-[120px] rounded-lg border-border/60 bg-muted/30 text-sm leading-7 focus:bg-white dark:focus:bg-background focus:border-amber-500/50 transition-all resize-y"
+                                                    className="min-h-[100px] rounded-lg border-border/60 bg-muted/30 text-sm leading-7 focus:bg-white dark:focus:bg-background focus:border-amber-500/50 transition-all resize-y"
                                                 />
                                                 <p className="text-xs text-muted-foreground">AI flags problematic claims against FDA/FTC standards</p>
                                             </div>
@@ -343,7 +335,7 @@ Valerian Root Extract - 300mg`}
                                                         <Zap className="h-3.5 w-3.5" />
                                                         Load Demo
                                                     </Button>
-                                                    {!isConfigured && (
+                                                    {(!isConfigured && !isSystemConfigured) && (
                                                         <Badge variant="destructive" className="gap-1.5 text-xs">
                                                             <AlertCircle className="h-3 w-3" />
                                                             API Key Required
@@ -356,7 +348,7 @@ Valerian Root Extract - 300mg`}
                                                     disabled={isLoading}
                                                     size="lg"
                                                     className={cn(
-                                                        "gap-2 rounded-lg px-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg shadow-blue-500/25 transition-all",
+                                                        "gap-2 rounded-lg px-6 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg shadow-blue-500/25 transition-all",
                                                         "disabled:opacity-70"
                                                     )}
                                                 >
@@ -377,25 +369,6 @@ Valerian Root Extract - 300mg`}
                                         </form>
                                     </CardContent>
                                 </Card>
-                            </motion.div>
-
-                            {/* Trust Bar */}
-                            <motion.div
-                                variants={itemVariants}
-                                className="mt-6 flex flex-wrap items-center justify-center gap-5 text-xs text-muted-foreground/50"
-                            >
-                                <div className="flex items-center gap-1.5">
-                                    <Dna className="h-3.5 w-3.5" />
-                                    Gemini 2.5 Pro
-                                </div>
-                                <div className="flex items-center gap-1.5">
-                                    <Atom className="h-3.5 w-3.5" />
-                                    Molecular Analysis
-                                </div>
-                                <div className="flex items-center gap-1.5">
-                                    <Pill className="h-3.5 w-3.5" />
-                                    50K+ Ingredients Database
-                                </div>
                             </motion.div>
                         </motion.div>
                     ) : (

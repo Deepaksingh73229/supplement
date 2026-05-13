@@ -49,11 +49,13 @@ const AnalysisSchema = z.object({
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const { productName, category, ingredientsText, marketingClaims, apiKey } = body;
+        const { productName, category, ingredientsText, marketingClaims, apiKey: userApiKey } = body;
+        
+        const apiKey = userApiKey || process.env.GEMINI_API_KEY;
 
         if (!apiKey) {
             return NextResponse.json(
-                { error: 'Gemini API key is required' },
+                { error: 'Gemini API key is required. Please set GEMINI_API_KEY in .env or provide it in Settings.' },
                 { status: 400 }
             );
         }

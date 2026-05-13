@@ -26,6 +26,7 @@ export function SidebarFooter({
                     alt='profile'
                     width={36}
                     height={36}
+                    loading="lazy"
                     className="rounded-full object-cover ring-2 ring-border shrink-0"
                 />
             </div>

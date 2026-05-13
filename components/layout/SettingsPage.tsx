@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Settings, Key, Shield, Info, ExternalLink, Trash2, CheckCircle2,
@@ -16,9 +16,15 @@ import { useGeminiKey } from '@/hooks/useGeminiKey';
 import { toast } from '@/hooks/use-toast';
 
 export function SettingsPage() {
-    const { apiKey, setApiKey, clearApiKey, isConfigured } = useGeminiKey();
+    const { apiKey, setApiKey, clearApiKey, isConfigured, isSystemConfigured } = useGeminiKey();
     const [showKey, setShowKey] = useState(false);
     const [localKey, setLocalKey] = useState(apiKey);
+
+    useEffect(() => {
+        setLocalKey(apiKey);
+    }, [apiKey]);
+
+    const isActuallyConfigured = isConfigured || isSystemConfigured;
 
     const handleSave = () => {
         setApiKey(localKey);
@@ -40,7 +46,7 @@ export function SettingsPage() {
     };
 
     return (
-        <div className="min-h-[calc(100vh-4rem)] bg-gradient-to-b from-background to-muted/20 p-6">
+        <div className="min-h-[calc(100vh-4rem)] bg-linear-to-b from-background to-muted/20 p-6">
             <div className="max-w-5xl mx-auto pt-8 space-y-8">
 
                 {/* Header */}
@@ -71,13 +77,13 @@ export function SettingsPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1, duration: 0.4 }}
                     >
-                        <Card className={`overflow-hidden transition-colors duration-300 ${isConfigured ? 'border-emerald-500/20 shadow-sm' : 'border-primary/20 shadow-md'}`}>
+                        <Card className={`overflow-hidden transition-colors duration-300 ${isActuallyConfigured ? 'border-emerald-500/20 shadow-sm' : 'border-primary/20 shadow-md'}`}>
                             <CardContent className="p-0">
                                 {/* Card Header Area */}
                                 <div className="px-6 py-2.5  border-b bg-muted/10">
                                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                         <div className="flex items-center gap-3">
-                                            <div className={`p-2.5 rounded-xl ${isConfigured ? 'bg-emerald-500/10 text-emerald-600' : 'bg-primary/10 text-primary'}`}>
+                                            <div className={`p-2.5 rounded-xl ${isActuallyConfigured ? 'bg-emerald-500/10 text-emerald-600' : 'bg-primary/10 text-primary'}`}>
                                                 <Key className="h-5 w-5" />
                                             </div>
                                             
@@ -87,25 +93,32 @@ export function SettingsPage() {
                                             </div>
                                         </div>
 
-                                        <Badge
-                                            variant={isConfigured ? 'outline' : 'secondary'}
-                                            className={`gap-1.5 px-3 py-1 text-sm ${isConfigured
-                                                    ? 'border-emerald-500/30 text-emerald-600 bg-emerald-500/5'
-                                                    : 'bg-primary/10 text-primary'
-                                                }`}
-                                        >
-                                            {isConfigured ? (
-                                                <>
-                                                    <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                                                    Connected
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <AlertCircle className="h-3.5 w-3.5" />
-                                                    Configuration Required
-                                                </>
+                                        <div className="flex items-center gap-2">
+                                            {isSystemConfigured && !isConfigured && (
+                                                <Badge variant="outline" className="border-blue-500/30 text-blue-600 bg-blue-500/5 gap-1.5">
+                                                    System Default Active
+                                                </Badge>
                                             )}
-                                        </Badge>
+                                            <Badge
+                                                variant={isActuallyConfigured ? 'outline' : 'secondary'}
+                                                className={`gap-1.5 px-3 py-1 text-sm ${isActuallyConfigured
+                                                        ? 'border-emerald-500/30 text-emerald-600 bg-emerald-500/5'
+                                                        : 'bg-primary/10 text-primary'
+                                                    }`}
+                                            >
+                                                {isActuallyConfigured ? (
+                                                    <>
+                                                        <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                                                        Connected
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <AlertCircle className="h-3.5 w-3.5" />
+                                                        Configuration Required
+                                                    </>
+                                                )}
+                                            </Badge>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -115,10 +128,12 @@ export function SettingsPage() {
                                     <div className="flex items-start gap-3 p-4 rounded-xl bg-secondary/30 border border-secondary">
                                         <Shield className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
                                         <div className="space-y-1">
-                                            <p className="text-sm font-medium">Local Storage Only</p>
+                                            <p className="text-sm font-medium">Authentication Options</p>
 
                                             <p className="text-xs text-muted-foreground leading-relaxed">
-                                                Your API key is never stored on our servers. It is kept securely in your browser's local storage and is only transmitted directly to Google's API during execution.
+                                                {isSystemConfigured 
+                                                    ? 'A system-level API key is provided, but you can override it with your own personal key below. Personal keys are stored only in your browser.'
+                                                    : 'Your API key is never stored on our servers. It is kept securely in your browser\'s local storage and is only transmitted directly to Google\'s API during execution.'}
                                             </p>
                                         </div>
                                     </div>

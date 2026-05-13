@@ -63,8 +63,14 @@ export class GeminiClient {
         });
 
         if (!response.ok) {
-            const error = await response.text();
-            throw new Error(`Gemini API error: ${response.status} - ${error}`);
+            const errorData = await response.json().catch(() => ({}));
+            const errorMessage = errorData.error?.message || response.statusText || 'Unknown error';
+            
+            if (response.status === 429) {
+                throw new Error('API Quota Exceeded: You have reached your Gemini API limit. Please check your billing status or try again later, or provide your own API key in Settings.');
+            }
+            
+            throw new Error(`Gemini API error: ${response.status} - ${errorMessage}`);
         }
 
         const data = await response.json();
@@ -118,8 +124,14 @@ export class GeminiClient {
         });
 
         if (!response.ok) {
-            const error = await response.text();
-            throw new Error(`Embedding API error: ${response.status} - ${error}`);
+            const errorData = await response.json().catch(() => ({}));
+            const errorMessage = errorData.error?.message || response.statusText || 'Unknown error';
+
+            if (response.status === 429) {
+                throw new Error('API Quota Exceeded: You have reached your Gemini API limit. Please check your billing status or try again later, or provide your own API key in Settings.');
+            }
+
+            throw new Error(`Gemini API error: ${response.status} - ${errorMessage}`);
         }
 
         const data = await response.json();
@@ -147,8 +159,14 @@ export class GeminiClient {
         });
 
         if (!response.ok) {
-            const error = await response.text();
-            throw new Error(`Batch Embedding API error: ${response.status} - ${error}`);
+            const errorData = await response.json().catch(() => ({}));
+            const errorMessage = errorData.error?.message || response.statusText || 'Unknown error';
+
+            if (response.status === 429) {
+                throw new Error('API Quota Exceeded: You have reached your Gemini API limit. Please check your billing status or try again later, or provide your own API key in Settings.');
+            }
+
+            throw new Error(`Gemini API error: ${response.status} - ${errorMessage}`);
         }
 
         const data = await response.json();
